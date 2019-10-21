@@ -1,4 +1,4 @@
-package br.com.edufalcao;
+package br.com.edufalcao.controller;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
