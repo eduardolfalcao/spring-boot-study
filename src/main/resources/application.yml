@@ -1,0 +1,11 @@
+spring:
+    datasource:
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/gym_project?useTimezone=true&serverTimezone=UTC
+        username: root
+        password: admin123
+
+    jpa:
+        properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        hibernate.ddl-auto: update
+        spring.jpa.show-sql: false
