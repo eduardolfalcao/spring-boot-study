@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import br.com.edufalcao.converter.DozerConverter;
 import br.com.edufalcao.data.model.Person;
+import br.com.edufalcao.data.vo.PersonVO;
 import br.com.edufalcao.repository.PersonRepository;
 
 @Service
@@ -16,17 +18,19 @@ public class PersonServices {
 	@Autowired
 	PersonRepository repository;
 	
-	public Person create(Person p) {		
-		return repository.saveAndFlush(p);
+	public PersonVO create(PersonVO pVO) {
+		Person p = DozerConverter.parseObject(pVO, Person.class);
+		return DozerConverter.parseObject(repository.saveAndFlush(p),PersonVO.class);
 	}
 	
-	public List<Person> findAll(){
-		return repository.findAll();
+	public List<PersonVO> findAll(){
+		return DozerConverter.parseObject(repository.findAll(),PersonVO.class);
 	}
 	
-	public Person findById(long id) {
-		Optional<Person> p = repository.findById(id);
-		return p.orElseThrow(() -> new ResourceNotFoundException("No records found for this id: "+ id));
+	public PersonVO findById(long id) {
+		Person p = repository.findById(id).orElseThrow(() 
+				-> new ResourceNotFoundException("No records found for this id: "+ id));
+		return DozerConverter.parseObject(p,PersonVO.class);
 	}
 	
 	public void delete(long id) {
@@ -35,15 +39,14 @@ public class PersonServices {
 		repository.delete(p);		
 	}
 	
-	public Person update(Person p) {
+	public PersonVO update(PersonVO p) {
 		Person updated = repository.findById(p.getId()).orElseThrow(() 
 				-> new ResourceNotFoundException("No records found for this id: "+ p.getId()));
 		updated.setFirstName(p.getFirstName());
 		updated.setLastName(p.getLastName());
 		updated.setBirth(p.getBirth());
 		updated.setAddress(p.getAddress());
-		repository.save(updated);
-		return updated;
+		return DozerConverter.parseObject(repository.save(updated),PersonVO.class);
 	}
 	
 }
