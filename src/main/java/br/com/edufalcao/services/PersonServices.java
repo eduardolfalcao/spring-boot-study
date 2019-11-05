@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
-import br.com.edufalcao.model.Person;
+import br.com.edufalcao.data.model.Person;
 import br.com.edufalcao.repository.PersonRepository;
 
 @Service

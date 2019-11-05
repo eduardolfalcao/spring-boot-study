@@ -51,8 +51,16 @@
 	<dependency>
   		<groupId>junit</groupId>
   		<artifactId>junit</artifactId>
-	</dependency>	
+	</dependency>
+	
+	<dependency>
+    	<groupId>com.github.dozermapper</groupId>
+    	<artifactId>dozer-core</artifactId>
+    	<version>6.5.0</version>
+  	</dependency>	
   </dependencies>
+  
+  
   
   <build>
   	<plugins>

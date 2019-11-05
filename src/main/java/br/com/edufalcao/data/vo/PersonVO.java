@@ -1,39 +1,20 @@
-package br.com.edufalcao.model;
+package br.com.edufalcao.data.vo;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="person")
-public class Person implements Serializable{
+public class PersonVO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	@Column(name="first_name", nullable = false, length = 50)
 	private String firstName;
-	
-	@Column(name="last_name", nullable = false, length = 50)
 	private String lastName;
-	
-	@Column(nullable = false)
 	private Date birth;
-	
-	@Column(nullable = false, length = 100)
 	private String address;
 	
-	public Person() {}
-	
+	public PersonVO() {}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -48,6 +29,7 @@ public class Person implements Serializable{
 
 
 
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -56,7 +38,7 @@ public class Person implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Person other = (Person) obj;
+		PersonVO other = (PersonVO) obj;
 		if (address == null) {
 			if (other.address != null)
 				return false;
@@ -81,6 +63,7 @@ public class Person implements Serializable{
 			return false;
 		return true;
 	}
+
 
 
 
