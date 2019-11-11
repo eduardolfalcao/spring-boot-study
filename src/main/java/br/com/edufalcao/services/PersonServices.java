@@ -1,15 +1,16 @@
 package br.com.edufalcao.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.edufalcao.converter.DozerConverter;
+import br.com.edufalcao.converter.custom.PersonConverter;
 import br.com.edufalcao.data.model.Person;
 import br.com.edufalcao.data.vo.PersonVO;
+import br.com.edufalcao.data.vo.v2.PersonVOV2;
 import br.com.edufalcao.repository.PersonRepository;
 
 @Service
@@ -17,10 +18,15 @@ public class PersonServices {
 
 	@Autowired
 	PersonRepository repository;
-	
+		
 	public PersonVO create(PersonVO pVO) {
 		Person p = DozerConverter.parseObject(pVO, Person.class);
 		return DozerConverter.parseObject(repository.saveAndFlush(p),PersonVO.class);
+	}
+	
+	public PersonVOV2 create(PersonVOV2 pVOV2) {
+		Person p = PersonConverter.convertVoToEntity(pVOV2);
+		return PersonConverter.convertEntityToVO(repository.saveAndFlush(p));
 	}
 	
 	public List<PersonVO> findAll(){

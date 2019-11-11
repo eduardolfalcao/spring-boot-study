@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.edufalcao.data.vo.PersonVO;
+import br.com.edufalcao.data.vo.v2.PersonVOV2;
 import br.com.edufalcao.services.PersonServices;
 
 @RestController
@@ -25,6 +26,11 @@ public class PersonController {
 	
 	@PostMapping
 	public PersonVO create(@RequestBody PersonVO p) {
+		return services.create(p);
+	}
+	
+	@PostMapping("/v2")
+	public PersonVOV2 createV2(@RequestBody PersonVOV2 p) {
 		return services.create(p);
 	}
 	
