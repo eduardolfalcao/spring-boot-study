@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.edufalcao.data.vo.v1.PersonVO;
 import br.com.edufalcao.data.vo.v2.PersonVOV2;
 import br.com.edufalcao.services.PersonServices;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
+@Api(value="Person endpoint", description="Description for Person", tags= {"person-endpoint"})
 @RestController
 @RequestMapping("/api/person")
 public class PersonController {
@@ -48,6 +51,7 @@ public class PersonController {
 		return pVO;
 	}
 	
+	@ApiOperation(value="Find all people")
 	@GetMapping("/v1")
 	public List<PersonVO> findAll() {		
 		List<PersonVO> pVOList = services.findAll();
