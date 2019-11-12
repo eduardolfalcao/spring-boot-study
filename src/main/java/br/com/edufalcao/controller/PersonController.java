@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.edufalcao.data.vo.PersonVO;
+import br.com.edufalcao.data.vo.v1.PersonVO;
 import br.com.edufalcao.data.vo.v2.PersonVOV2;
 import br.com.edufalcao.services.PersonServices;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/person")
 public class PersonController {
 
 	@Autowired
 	private PersonServices services;
 	
-	@PostMapping
+	@PostMapping("/v1")
 	public PersonVO create(@RequestBody PersonVO p) {
 		return services.create(p);
 	}
@@ -34,22 +34,22 @@ public class PersonController {
 		return services.create(p);
 	}
 	
-	@PutMapping
+	@PutMapping("/v1")
 	public PersonVO update(@RequestBody PersonVO p) {
 		return services.update(p);
 	}
 	
-	@GetMapping
+	@GetMapping("/v1")
 	public List<PersonVO> findAll() {
 		return services.findAll();
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/v1/{id}")
 	public PersonVO findById(@PathVariable("id") Long id) {
 		return services.findById(id);
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/v1/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") Long id) {
 		services.delete(id);
 		return ResponseEntity.ok().build();

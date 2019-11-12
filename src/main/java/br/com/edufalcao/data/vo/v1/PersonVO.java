@@ -1,16 +1,28 @@
-package br.com.edufalcao.data.vo;
+package br.com.edufalcao.data.vo.v1;
 
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonPropertyOrder({"id", "address", "birth", "firstName", "lastName"})
 public class PersonVO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	private long id;
+	
+	@JsonProperty("first_name")
 	private String firstName;
+	
+	@JsonProperty("last_name")
 	private String lastName;
+	
+	@JsonIgnore
 	private Date birth;
+	
 	private String address;
 	
 	public PersonVO() {}

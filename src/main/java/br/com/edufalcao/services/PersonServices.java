@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.edufalcao.converter.DozerConverter;
 import br.com.edufalcao.converter.custom.PersonConverter;
 import br.com.edufalcao.data.model.Person;
-import br.com.edufalcao.data.vo.PersonVO;
+import br.com.edufalcao.data.vo.v1.PersonVO;
 import br.com.edufalcao.data.vo.v2.PersonVOV2;
 import br.com.edufalcao.repository.PersonRepository;
 

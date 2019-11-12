@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.edufalcao.data.model.Person;
-import br.com.edufalcao.data.vo.PersonVO;
+import br.com.edufalcao.data.vo.v1.PersonVO;
 
 public class MockPerson {
 	
