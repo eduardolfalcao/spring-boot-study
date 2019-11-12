@@ -3,11 +3,17 @@ package br.com.edufalcao.data.vo.v2;
 import java.io.Serializable;
 import java.util.Date;
 
-public class PersonVOV2 implements Serializable{
+import org.springframework.hateoas.ResourceSupport;
+
+import com.github.dozermapper.core.Mapping;
+
+public class PersonVOV2 extends ResourceSupport implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private long id;
+	@Mapping("id")
+	private long key;
+	
 	private String name;
 	private Date birth;
 	private String address;
@@ -17,10 +23,10 @@ public class PersonVOV2 implements Serializable{
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((birth == null) ? 0 : birth.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + (int) (key ^ (key >>> 32));
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -29,7 +35,7 @@ public class PersonVOV2 implements Serializable{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -44,7 +50,7 @@ public class PersonVOV2 implements Serializable{
 				return false;
 		} else if (!birth.equals(other.birth))
 			return false;
-		if (id != other.id)
+		if (key != other.key)
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -54,12 +60,14 @@ public class PersonVOV2 implements Serializable{
 		return true;
 	}
 
-	public long getId() {
-		return id;
-	}
 
-	public void setId(long id) {
-		this.id = id;
+
+	public long getKey() {
+		return key;
+	}
+	
+	public void setKey(long key) {
+		this.key = key;
 	}
 
 	public Date getBirth() {

@@ -1,5 +1,8 @@
 package br.com.edufalcao.controller;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,27 +29,37 @@ public class PersonController {
 	
 	@PostMapping("/v1")
 	public PersonVO create(@RequestBody PersonVO p) {
-		return services.create(p);
+		PersonVO pVO = services.create(p);
+		pVO.add(linkTo(methodOn(PersonController.class).create(p)).withSelfRel());
+		return pVO;
 	}
 	
 	@PostMapping("/v2")
 	public PersonVOV2 createV2(@RequestBody PersonVOV2 p) {
-		return services.create(p);
+		PersonVOV2 pVOV2 = services.create(p);
+		pVOV2.add(linkTo(methodOn(PersonController.class).createV2(pVOV2)).withSelfRel());
+		return pVOV2;
 	}
 	
 	@PutMapping("/v1")
 	public PersonVO update(@RequestBody PersonVO p) {
-		return services.update(p);
+		PersonVO pVO = services.update(p);
+		pVO.add(linkTo(methodOn(PersonController.class).create(p)).withSelfRel());
+		return pVO;
 	}
 	
 	@GetMapping("/v1")
-	public List<PersonVO> findAll() {
-		return services.findAll();
+	public List<PersonVO> findAll() {		
+		List<PersonVO> pVOList = services.findAll();
+		pVOList.stream().forEach(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()));
+		return pVOList;
 	}
 	
 	@GetMapping("/v1/{id}")
 	public PersonVO findById(@PathVariable("id") Long id) {
-		return services.findById(id);
+		PersonVO pVO = services.findById(id);
+		pVO.add(linkTo(methodOn(PersonController.class).findById(pVO.getKey())).withSelfRel());
+		return pVO;
 	}
 	
 	@DeleteMapping("/v1/{id}")

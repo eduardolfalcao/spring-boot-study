@@ -21,7 +21,7 @@ public class DozerConverterTest {
 	public void parseEntityToVOTest() {
 		Person p = mock.mockEntity();
 		PersonVO pVO = DozerConverter.parseObject(p, PersonVO.class);
-		Assert.assertEquals(pVO.getId(),0);
+		Assert.assertEquals(pVO.getKey(),0);
 		//verify other attributes
 	}
 	

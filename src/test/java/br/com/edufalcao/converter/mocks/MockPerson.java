@@ -46,7 +46,7 @@ public class MockPerson {
 		p.setAddress("Fifth Avenue, "+id);
 		p.setFirstName("Fisrt name test "+id);
 		p.setFirstName("Last name test "+id);
-		p.setId(id);
+		p.setKey(id);
 		return p;
 	}
 
