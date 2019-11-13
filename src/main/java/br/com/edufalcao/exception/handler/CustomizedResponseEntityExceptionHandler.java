@@ -12,6 +12,8 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import br.com.edufalcao.exception.ExceptionResponse;
+import br.com.edufalcao.exception.InvalidJwtAuthenticationException;
+import br.com.edufalcao.exception.ResourceNotFoundException;
 
 @RestController
 @ControllerAdvice
@@ -21,6 +23,28 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 	@ExceptionHandler({ MethodArgumentTypeMismatchException.class })
 	public ResponseEntity<ExceptionResponse> handleMethodArgumentTypeMismatch(
 	  MethodArgumentTypeMismatchException ex, WebRequest request) {	 
+	    ExceptionResponse exceptionResponse = 
+				new ExceptionResponse(
+						new Date(), 
+						ex.getMessage(), 
+						request.getDescription(false));
+	    return new ResponseEntity<ExceptionResponse>(
+	      exceptionResponse, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler({ ResourceNotFoundException.class })
+	public ResponseEntity<ExceptionResponse> handleBadRequestExceptions(Exception ex, WebRequest request) {	 
+	    ExceptionResponse exceptionResponse = 
+				new ExceptionResponse(
+						new Date(), 
+						ex.getMessage(), 
+						request.getDescription(false));
+	    return new ResponseEntity<ExceptionResponse>(
+	      exceptionResponse, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler({ InvalidJwtAuthenticationException.class })
+	public ResponseEntity<ExceptionResponse> invalidJwtAuthenticationException(Exception ex, WebRequest request) {	 
 	    ExceptionResponse exceptionResponse = 
 				new ExceptionResponse(
 						new Date(), 
