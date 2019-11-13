@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.springframework.hateoas.ResourceSupport;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.github.dozermapper.core.Mapping;
 
@@ -19,6 +20,8 @@ public class PersonVO extends ResourceSupport implements Serializable{
 	private String firstName;
 	private String lastName;
 	private Date birth;
+	
+	@JsonIgnore
 	private String address;
 	
 	public PersonVO() {}
