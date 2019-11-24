@@ -30,7 +30,7 @@ public class User implements UserDetails, Serializable {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "username", unique = true)
+	@Column(name = "user_name", unique = true)
 	private String username;
 	
 	@Column(name = "password")
